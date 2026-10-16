@@ -205,3 +205,30 @@ def delete_product():
             cursor.close()
         if connection is not None and connection.is_connected():
             connection.close()
+
+def low_stock_alert():
+    connection=get_connection()
+    cur=connection.cursor()
+    try:
+     query="SELECT product_id,product_name,stock FROM PRODUCTS WHERE stock<=5 and is_active=True"
+    
+     cur.execute(query)
+     products=cur.fetchall()
+    
+     if products :
+        print("----Low Stock Alert")
+        for product in products:
+            print(f"Id : {product["product_id"]} |",
+                  f"Name : {product["product_name"]}|",
+                  f"stock : {product["stock"]}")
+     else:
+        print("No low stock found")
+        
+    except Exception as e:
+      print("ERROR",e)
+      
+    finally:
+        cur.close()
+        connection.close()
+        
+    
