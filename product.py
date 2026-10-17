@@ -218,7 +218,8 @@ def low_stock_alert():
      if products :
         print("----Low Stock Alert")
         for product in products:
-            print(f"Id : {product["product_id"]} |",
+            print(f"Price: {product["price"]}"
+                  f"Id : {product["product_id"]} |",
                   f"Name : {product["product_name"]}|",
                   f"stock : {product["stock"]}")
      else:
@@ -231,4 +232,31 @@ def low_stock_alert():
         cur.close()
         connection.close()
         
-    
+def search_product():
+        connection=get_connection()
+        cur=connection.cursor()
+        
+        try:
+            product_name=input("Enter product name you wan to search")
+            
+            query ="SELECT * FROM PRODUCTS WHERE product_name='{}' and is_active=True".format(product_name)
+            
+            cur.execute(query)
+            products=cur.fetchall()
+            
+            if products:
+                for product in products:
+                    print(f"Id : {product["product_id"]} |",
+                  f"Name : {product["product_name"]}|",
+                  f"stock : {product["stock"]}")
+            else:
+                print("No product Found")
+                
+        except Exception as e:
+            print("ERROR :",e)
+            
+        finally:
+            cur.close()
+            connection.close()
+            
+        

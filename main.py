@@ -1,4 +1,5 @@
-from product import  add_product,update_product,view_products,delete_product,low_stock_alert
+from product import  add_product,update_product,view_products,delete_product,low_stock_alert,search_product
+
 def main():
     while True:
         print("******welcome******")
@@ -8,7 +9,8 @@ def main():
         print("3.Update products")
         print("4.Delete product")
         print("5.Low stock alerts")
-        print("6.To exit")
+        print("6.To search product")
+        print("7. To exit")
         
         print("*****Thank you******")
         
@@ -30,7 +32,9 @@ def main():
             elif choice==5:
                 low_stock_alert()
             elif choice==6:
-                print("Exiting")
+               search_product()
+            elif choice==7:
+                print("Exit")
                 break
             else:
                 print("Enter valid choice")
